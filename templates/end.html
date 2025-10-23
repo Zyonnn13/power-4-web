@@ -2,36 +2,47 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fin de partie</title>
-    <link rel="stylesheet" href="/static/css/style.css" />
+  <meta charset="UTF-8">
+  <title>Crédits - Puissance 4</title>
+  <link rel="stylesheet" href="/static/css/end.css">
 </head>
 <body>
-    <main class="container">
-        <section class="end">
-            <h1>Fin de la partie</h1>
+  <div class="credits-container">
+    <div class="credits">
+      <h1>PUISSANCE 4</h1>
+      <h2>Un grand merci d'avoir joué à Puissance‑4 Web ! Ce projet a été réalisé avec passion. Voici les personnes et ressources qui ont contribué</h2>
 
-            {{if .Winner}}
-                <p class="result">Victoire de <strong>{{.Winner}}</strong> !</p>
-            {{else}}
-                <p class="result">Égalité entre <strong>{{.Player1}}</strong> et <strong>{{.Player2}}</strong></p>
-            {{end}}
+      <h3>Développement</h3>
+      <p>Clément</p>
+      <p>Samuel</p>
 
-            <dl>
-                <dt>Joueur 1</dt><dd>{{.Player1}}</dd>
-                <dt>Joueur 2</dt><dd>{{.Player2}}</dd>
-                <dt>Date</dt><dd>{{.Date}}</dd>
-                <dt>Nombre de tours</dt><dd>{{.Turns}}</dd>
-            </dl>
+      <h3>Design</h3>
+      <p>Copilote tu connais</p>
 
-            <form method="get" action="/templates/init">
-                <button type="submit">Rejouer</button>
-            </form>
+      <h3>Remerciements</h3>
+      <p>Merci à la communauté, aux amis et aux testeurs qui ont aidé à améliorer le jeu par leurs retours.</p>
 
-            <p><a href="/templates/scoreboard">Voir le scoreboard</a></p>
-        </section>
-    </main>
+      <h4>Info</h4>
+      <p>Infos
+
+Version : 0.1.0
+Date : 2025-10-23
+Contact / signaler un bug :  https://github.com/<ton-repo>/issues
+Contribuer
+Le code source est disponible sur GitHub — contributions et rapports de bugs bienvenus. Consulte le README pour les instructions.
+
+</p>
+
+      <h2>Fin</h2>
+      <!-- buttons removed from scrolling credits so they remain clickable -->
+    </div>
+  <!-- fixed action buttons (kept outside the scrolling credits so they're always clickable) -->
+  <div class="end-actions">
+    <a class="btn" href="/templates/init">Nouvelle partie</a>
+    <a class="btn" href="/templates/scoreboard">Scoreboard</a>
+  </div>
+  </div>
+  <script src="/static/js/end.js"></script>
 </body>
 </html>
 {{end}}

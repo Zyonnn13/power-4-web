@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #C2185B, #FF7043);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden; /* empêche le scroll manuel */
+}
+
+.credits-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.credits {
+  position: absolute;
+  bottom: -100%; /* commence en bas */
+  width: 100%;
+  text-align: center;
+  /* delay so buttons are visible before the credits start */
+  animation: scroll-up 20s linear 3s forwards;
+  /* allow clicks to pass through the scrolling area */
+  pointer-events: none;
+}
+
+@keyframes scroll-up {
+  from { bottom: -100%; }
+  to { bottom: 100%; }
+}
+
+h1, h2, h3 {
+  margin: 20px 0 10px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.end-actions {
+  margin-top: 2rem;
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+}
+
+.btn {
+  padding: .6rem 1rem;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* fixed action buttons so they're always visible and clickable */
+.end-actions {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 4rem;
+  z-index: 50; /* above credits */
+  pointer-events: auto; /* ensure buttons receive clicks */
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+/* keep the credits visually on top but not blocking clicks */
+.credits {
+  z-index: 10;
+}
+
+/* hide actions while credits are playing */
+.end-actions.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px);
+  pointer-events: none;
+}
