@@ -7,25 +7,29 @@ import (
 	"os"
 )
 
-var temp *template.Template
-
 func main() {
 
-	// Charger tous les templates HTML
-	var err error
-	temp = template.New("")
-	temp, err = temp.ParseGlob("./templates/*.html")
-	if err != nil {
-		fmt.Println("Erreur chargement templates:", err)
-		os.Exit(1)
-	}
-	temp, err = temp.ParseGlob("./templates/game/*.html")
-	if err != nil {
-		fmt.Println("Erreur chargement templates game:", err)
+	temp, errtemp := template.ParseGlob("./templates/*.html")
+	if errtemp != nil {
+		fmt.Println(errtemp)
 		os.Exit(1)
 	}
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./assets"))))
+	http.HandleFunc("/templates/init", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "init", nil)
+	})
+
+	http.HandleFunc("/templates/play", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "play", nil)
+	})
+
+	http.HandleFunc("/templates/end", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "end", nil)
+	})
+
+	http.HandleFunc("/templates/scoreboard", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "scoreboard", nil)
+	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.String() != "/" {
@@ -36,6 +40,10 @@ func main() {
 		temp.ExecuteTemplate(w, "index", nil)
 	})
 
-	fmt.Println("Serveur démarré sur http://localhost:8000")
+	chemin, _ := os.Getwd()
+	fmt.Println(chemin)
+	fileserver := http.FileServer(http.Dir(chemin + "/assets"))
+	http.Handle("/static/", http.StripPrefix("/static/", fileserver))
+
 	http.ListenAndServe(":8000", nil)
 }

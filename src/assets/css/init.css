@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../img/img.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+section {
+    padding: 30px;
+    background-color: transparent;
+    border: 2px solid #ccc;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    width: 420px;
+}
+
+section h1 {
+    color: azure;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.input-box {
+    margin-bottom: 25px;
+    width: 100%;
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    color: white;
+    font-weight: 500;
+}
+
+.input-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-box input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.color-choice {
+    margin-bottom: 25px;
+}
+
+.color-choice span {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.color-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.color-option {
+    cursor: pointer;
+    display: block;
+}
+
+.color-option input[type="radio"] {
+    display: none;
+}
+
+.color-display {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.color-option input[type="radio"]:checked + .color-display {
+    border-color: #28a745;
+    background: rgba(40, 167, 69, 0.2);
+    transform: scale(1.05);
+}
+
+.color-option:hover .color-display {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+.pion {
+     width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+   
+}
+
+.pion.red {
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+    border: 3px solid #a61e1e;
+}
+
+.pion.yellow {
+    background: radial-gradient(circle at 30% 30%, #ffd43b, #fab005);
+    border: 3px solid #c77700;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
