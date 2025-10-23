@@ -1,0 +1,35 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+            <img src="/static/img/logo titre p4.jpg" alt="Logo">
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/jeu">Jouer</a></li>
+                <li><a href="/scores">Scores</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="part1">
+    <h1>Puissance 4 pour le Web !</h1>
+    <h2>Bienvenue dans notre puissance 4 fait pour le web. Nous vous invitons tout d'abord à lire les règles un peu plus bas puis de commencer votre partie en y prenant le plus de plaisir !</h2>
+        <img src="/static/img/logo p4.jpg" alt="Image Puissance 4">
+    </section>
+    <section class="part2">
+    <h2>Règles du jeu :</h2>
+    <p>Le but du jeu est d'aligner 4 pions de sa couleur horizontalement, verticalement ou en diagonale avant son adversaire. Chaque joueur choisit une couleur de pion (rouge ou jaune) et à tour de rôle, ils placent un pion dans l'une des colonnes du plateau de jeu. Le pion tombe jusqu'à la position la plus basse disponible dans la colonne choisie. Le jeu continue jusqu'à ce qu'un joueur aligne 4 pions ou que le plateau soit rempli sans qu'aucun joueur n'ait réussi à aligner 4 pions, ce qui entraîne une égalité.</p>
+    </section>
+    <button class="start"><a href="/jeu">Commencer la partie</a></button>
+    <footer>
+        <p>&copy; 2025 Puissance 4 Web. Tous droits réservés.</p>
+</body>
+</html>
+{{end}}
