@@ -1,0 +1,37 @@
+{{define "end"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fin de partie</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <main class="container">
+        <section class="end">
+            <h1>Fin de la partie</h1>
+
+            {{if .Winner}}
+                <p class="result">Victoire de <strong>{{.Winner}}</strong> !</p>
+            {{else}}
+                <p class="result">Égalité entre <strong>{{.Player1}}</strong> et <strong>{{.Player2}}</strong></p>
+            {{end}}
+
+            <dl>
+                <dt>Joueur 1</dt><dd>{{.Player1}}</dd>
+                <dt>Joueur 2</dt><dd>{{.Player2}}</dd>
+                <dt>Date</dt><dd>{{.Date}}</dd>
+                <dt>Nombre de tours</dt><dd>{{.Turns}}</dd>
+            </dl>
+
+            <form method="get" action="/templates/init">
+                <button type="submit">Rejouer</button>
+            </form>
+
+            <p><a href="/templates/scoreboard">Voir le scoreboard</a></p>
+        </section>
+    </main>
+</body>
+</html>
+{{end}}

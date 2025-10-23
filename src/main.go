@@ -5,6 +5,10 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"strconv"
+	"time"
+
+	"power-4-web/models"
 )
 
 func main() {
@@ -24,7 +28,41 @@ func main() {
 	})
 
 	http.HandleFunc("/templates/end", func(w http.ResponseWriter, r *http.Request) {
-		temp.ExecuteTemplate(w, "end", nil)
+		q := r.URL.Query()
+		p1 := q.Get("player1")
+		p2 := q.Get("player2")
+		winner := q.Get("winner")
+		turns := 0
+		if t := q.Get("turns"); t != "" {
+			if v, err := strconv.Atoi(t); err == nil {
+				turns = v
+			}
+		}
+
+		rec := models.GameRecord{
+			Player1: p1,
+			Player2: p2,
+			Winner:  winner,
+			Date:    time.Now(),
+			Turns:   turns,
+		}
+		models.AddRecord(rec)
+
+		data := struct {
+			Player1 string
+			Player2 string
+			Winner  string
+			Date    string
+			Turns   int
+		}{
+			Player1: rec.Player1,
+			Player2: rec.Player2,
+			Winner:  rec.Winner,
+			Date:    rec.Date.Format("2006-01-02 15:04:05"),
+			Turns:   rec.Turns,
+		}
+
+		temp.ExecuteTemplate(w, "end", data)
 	})
 
 	http.HandleFunc("/templates/scoreboard", func(w http.ResponseWriter, r *http.Request) {

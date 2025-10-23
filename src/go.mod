@@ -1,3 +1,3 @@
-module main
+module power-4-web
 
-go 1.20
+go 1.25.0
