@@ -13,18 +13,22 @@ import (
 
 func main() {
 
-	temp, errtemp := template.ParseGlob("./templates/*.html")
-	if errtemp != nil {
-		fmt.Println(errtemp)
-		os.Exit(1)
-	}
-
-	http.HandleFunc("/templates/init", func(w http.ResponseWriter, r *http.Request) {
-		temp.ExecuteTemplate(w, "init", nil)
-	})
+	temp := template.Must(template.New("").Funcs(template.FuncMap{
+		"seq": func(count int) []int {
+			s := make([]int, count)
+			for i := range s {
+				s[i] = i
+			}
+			return s
+		},
+	}).ParseGlob("./templates/*.html"))
 
 	http.HandleFunc("/templates/play", func(w http.ResponseWriter, r *http.Request) {
 		temp.ExecuteTemplate(w, "play", nil)
+	})
+
+	http.HandleFunc("/templates/init", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "init", nil)
 	})
 
 	http.HandleFunc("/templates/end", func(w http.ResponseWriter, r *http.Request) {

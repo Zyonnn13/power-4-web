@@ -1,42 +1,139 @@
 {{define "index"}}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <meta name="description"
+        content="Puissance 4 en ligne : joue en temps réel depuis ton navigateur, défie tes amis ou lance une partie publique.">
+    <title>Puissance 4 en ligne</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="/static/img/logo_titre_p4-removebg-preview.png" alt="Logo">
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">
+                <img class="brand-logo" src="/static/img/logo.png" alt="Puissance 4 Online">
             </div>
-            <ul class="raccourcis">
-                <li><a href="/">Accueil</a></li>
-                <li><a href="/jeu">Jouer</a></li>
-                <li><a href="/scores">Scores</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="part1">
-        <div class="text-content">
-            <h1>Puissance 4 pour le Web !</h1>
-            <h2>Bienvenue dans notre puissance 4 fait pour le web. Nous vous invitons tout d'abord à lire les règles un peu plus bas puis à commencer votre partie en y prenant le plus de plaisir !</h2>
+            <nav class="site-nav">
+                <a href="#regles">Règles</a>
+                <a href="#features">Fonctionnalités</a>
+                <a class="btn btn--small btn--primary" href="/play">Jouer</a>
+            </nav>
         </div>
-        <img src="/static/img/logo p4.jpg" alt="Image Puissance 4">
-    </section>
-    <section class="part2">
-    <h2>Règles du jeu :</h2>
-    <p>Le but du jeu est d'aligner 4 pions de sa couleur horizontalement, verticalement ou en diagonale avant son adversaire. Chaque joueur choisit une couleur de pion (rouge ou jaune) et à tour de rôle, ils placent un pion dans l'une des colonnes du plateau de jeu. Le pion tombe jusqu'à la position la plus basse disponible dans la colonne choisie. Le jeu continue jusqu'à ce qu'un joueur aligne 4 pions ou que le plateau soit rempli sans qu'aucun joueur n'ait réussi à aligner 4 pions, ce qui entraîne une égalité.</p>
-    </section>
-    <button class="start">
-        <a class="start" href="/jeu">Commencer la partie</a>
-    </button>
-    <footer class="footer">
-        <p>&copy; 2025 Puissance 4 Web. Tous droits réservés.</p>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero__grid">
+                <div class="hero__content">
+                    <p class="eyebrow">Puissance 4 en ligne</p>
+                    <h1>Aligne quatre jetons et défie tes amis en temps réel</h1>
+                    <p class="lead">
+                        Une version moderne du classique Puissance 4, jouable directement depuis ton navigateur.
+                        Invite un ami ou lance une partie publique pour montrer ta stratégie.
+                    </p>
+                    <div class="hero__actions">
+                        <a class="btn btn--primary" href="/play">Jouer maintenant</a>
+                        <a class="btn btn--ghost" href="#regles">Voir les règles</a>
+                    </div>
+                    <ul class="badges">
+                        <li>Temps réel</li>
+                        <li>Matchmaking auto</li>
+                        <li>100% gratuit</li>
+                    </ul>
+                </div>
+                <div class="hero__media">
+                    <div class="board board--preview">
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                        <div class="board__row">
+                            <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="regles" class="rules">
+            <div class="container">
+                <h2>Comment jouer ?</h2>
+                <div class="rules__grid">
+                    <article>
+                        <h3>1. Choisis une colonne</h3>
+                        <p>Chaque tour, laisse tomber un jeton dans la colonne de ton choix. Les jetons s’empilent du bas vers le
+                            haut.</p>
+                    </article>
+                    <article>
+                        <h3>2. Crée un alignement</h3>
+                        <p>Aligne quatre jetons de ta couleur verticalement, horizontalement ou en diagonale pour remporter la
+                            partie.</p>
+                    </article>
+                    <article>
+                        <h3>3. Anticipe l’adversaire</h3>
+                        <p>Bloque les tentatives de ton adversaire et prépare plusieurs menaces en même temps pour prendre
+                            l’avantage.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Pourquoi tu vas aimer</h2>
+                <div class="features__grid">
+                    <article>
+                        <h3>Serveur Go rapide</h3>
+                        <p>Parties fluides, temps de réponse minimal et synchronisation exacte entre les joueurs.</p>
+                    </article>
+                    <article>
+                        <h3>Mode duel privé</h3>
+                        <p>Génère un lien d’invitation en un clic pour affronter un ami sans inscription.</p>
+                    </article>
+                    <article>
+                        <h3>Statistiques live</h3>
+                        <p>Suis ton taux de victoire, tes séries de succès et tes coups préférés pour progresser.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container cta__content">
+                <div>
+                    <h2>Prêt à jouer ?</h2>
+                    <p>La prochaine partie commence dès que tu cliques.</p>
+                </div>
+                <a class="btn btn--primary btn--large" href="/play">Lancer une partie</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Puissance 4 Online. Propulsé par Go.</p>
+            <div class="footer__links">
+                <a href="/templates/scoreboard">Scoreboard</a>
+                <a href="/templates/play">Salle de jeu</a>
+            </div>
+        </div>
     </footer>
 </body>
+
 </html>
 {{end}}

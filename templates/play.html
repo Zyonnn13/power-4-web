@@ -1,0 +1,22 @@
+{{define "play"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Puissance 4</title>
+    <link rel="stylesheet" href="/static/css/play.css">
+</head>
+<body>
+    <h1>Puissance 4</h1>
+    <div class="board">
+        {{range $i := seq 6}}
+        <div class="board-row">
+            {{range $j := seq 7}}
+            <span class="board-cell" data-row="{{$i}}" data-col="{{$j}}"></span>
+            {{end}}
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
+{{end}}
