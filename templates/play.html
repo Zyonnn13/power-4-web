@@ -1,22 +1,87 @@
 {{define "play"}}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puissance 4</title>
     <link rel="stylesheet" href="/static/css/play.css">
 </head>
-<body>
-    <h1>Puissance 4</h1>
-    <div class="board">
-        {{range $i := seq 6}}
-        <div class="board-row">
-            {{range $j := seq 7}}
-            <span class="board-cell" data-row="{{$i}}" data-col="{{$j}}"></span>
+
+<body class="play-body">
+    <main class="play-wrapper">
+        <header class="play-header">
+            <div>
+                <p class="eyebrow">Partie en cours</p>
+                <h1>Puissance 4</h1>
+                <ul class="players-list">
+                    <li>
+                        <span class="player-dot player-dot--{{.Game.Player1Color}}"></span>
+                        <span>{{.Game.Player1Name}}</span>
+                    </li>
+                    <li>
+                        <span class="player-dot player-dot--{{.Game.Player2Color}}"></span>
+                        <span>{{.Game.Player2Name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="status">
+                {{if .Error}}
+                <p class="status-badge status-badge--error">{{.Error}}</p>
+                {{else if .Message}}
+                <p class="status-badge status-badge--info">{{.Message}}</p>
+                {{else if .Game.Finished}}
+                <p class="status-badge status-badge--info">Partie terminée.</p>
+                {{else}}
+                <p class="status-badge">
+                    Tour de
+                    <span class="player-label player-label--{{if eq .Game.CurrentPlayer 1}}{{.Game.Player1Color}}{{else}}{{.Game.Player2Color}}{{end}}">
+                        {{if eq .Game.CurrentPlayer 1}}{{.Game.Player1Name}}{{else}}{{.Game.Player2Name}}{{end}}
+                    </span>
+                </p>
+                {{end}}
+            </div>
+        </header>
+
+        <section class="board-panel">
+            <form method="POST" action="/game/play/traitement" class="column-picker">
+                {{range $idx, $col := .Columns}}
+                <button type="submit" name="col" value="{{$col}}" {{if $.Game.Finished}}disabled{{end}}>
+                    {{inc $col}}
+                </button>
+                {{end}}
+            </form>
+
+            <div class="board">
+                {{range $row := .Game.Board}}
+                <div class="board-row">
+                    {{range $cell := $row}}
+                    <span class="board-cell {{if eq $cell 1}}board-cell--{{$.Game.Player1Color}}{{else if eq $cell 2}}board-cell--{{$.Game.Player2Color}}{{end}}"></span>
+                    {{end}}
+                </div>
+                {{end}}
+            </div>
+        </section>
+
+        <section class="actions">
+            {{if .CanReset}}
+            <div class="restart-panel">
+                <p>Que souhaites-tu faire ?</p>
+                <div class="restart-actions">
+                    <form method="POST" action="/game/play/traitement">
+                        <button class="btn btn--secondary" type="submit" name="action" value="reset">Relancer avec les mêmes joueurs</button>
+                    </form>
+                    <a class="btn btn--ghost" href="/game/init">Nouvelle partie (choisir des joueurs)</a>
+                </div>
+            </div>
+            {{else}}
+            <p>Choisis une colonne pour déposer ton jeton.</p>
             {{end}}
-        </div>
-        {{end}}
-    </div>
+            <a class="btn btn--ghost btn--back" href="/">Retour à l’accueil</a>
+        </section>
+    </main>
 </body>
+
 </html>
 {{end}}
