@@ -26,12 +26,12 @@ func main() {
 
 	initPageHandler := handlers.InitPageHandler(temp)
 	http.HandleFunc("/game/init", initPageHandler)
-	http.HandleFunc("/init", initPageHandler) // compatibilité
+	http.HandleFunc("/init", initPageHandler)
 	http.HandleFunc("/game/init/traitement", handlers.InitProcessHandler())
 
 	playPageHandler := handlers.PlayPageHandler(temp)
 	http.HandleFunc("/game/play", playPageHandler)
-	http.HandleFunc("/play", playPageHandler) // compatibilité
+	http.HandleFunc("/play", playPageHandler)
 	http.HandleFunc("/game/play/traitement", handlers.PlayActionHandler())
 
 	endHandler := handlers.EndPageHandler(temp)
@@ -42,7 +42,7 @@ func main() {
 	http.HandleFunc("/game/scoreboard", scoreboardHandler)
 	http.HandleFunc("/templates/scoreboard", scoreboardHandler)
 
-	http.HandleFunc("/api/init", handlers.InitGame)
+	http.HandleFunc("/api/init", handlers.InitGameAPI)
 	http.HandleFunc("/api/play", handlers.PlayMove)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

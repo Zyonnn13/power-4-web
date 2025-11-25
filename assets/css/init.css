@@ -5,6 +5,19 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+:root {
+    --bg: #040616;
+    --bg-alt: #0b0f27;
+    --card: #101636;
+    --primary: #ffb703;
+    --primary-dark: #e09800;
+    --text: #f5f7ff;
+    --muted: #9aa0c3;
+    --accent-blue: #4361ee;
+    --accent-red: #ef233c;
+    --max-width: 1100px;
+}
+
 body {
     display: flex;
     align-items: center;
