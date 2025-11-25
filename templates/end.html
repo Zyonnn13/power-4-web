@@ -6,30 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fin de partie</title>
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
 </head>
 <body>
     <main class="container">
-        <section class="end">
-            <h1>Fin de la partie</h1>
+        <section class="end-screen reveal is-visible">
+            <h1 class="end-title">Fin de la partie</h1>
 
-            {{if .Winner}}
-                <p class="result">Victoire de <strong>{{.Winner}}</strong> !</p>
-            {{else}}
-                <p class="result">Égalité entre <strong>{{.Player1}}</strong> et <strong>{{.Player2}}</strong></p>
+            {{if .Message}}
+                <p class="end-result">{{.Message}}</p>
             {{end}}
 
-            <dl>
+            {{if .Winner}}
+                <p class="end-result">Victoire de <strong>{{.Winner}}</strong> !</p>
+            {{else}}
+                <p class="end-result">Égalité entre <strong>{{.Player1}}</strong> et <strong>{{.Player2}}</strong></p>
+            {{end}}
+
+            <dl class="end-details">
                 <dt>Joueur 1</dt><dd>{{.Player1}}</dd>
                 <dt>Joueur 2</dt><dd>{{.Player2}}</dd>
                 <dt>Date</dt><dd>{{.Date}}</dd>
                 <dt>Nombre de tours</dt><dd>{{.Turns}}</dd>
             </dl>
 
-            <form method="get" action="/templates/init">
-                <button type="submit">Rejouer</button>
-            </form>
+            <div class="end-actions">
+                <form method="post" action="/game/play/traitement">
+                    <button type="submit" name="action" value="reset" class="btn btn--ghost">Relancer avec les mêmes joueurs</button>
+                </form>
+                <form method="get" action="/game/init">
+                    <button type="submit" class="btn btn--primary">Nouvelle partie</button>
+                </form>
+            </div>
 
-            <p><a href="/templates/scoreboard">Voir le scoreboard</a></p>
+            <p><a href="/game/scoreboard" class="end-link">Voir le scoreboard</a></p>
         </section>
     </main>
 </body>

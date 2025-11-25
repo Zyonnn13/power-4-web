@@ -9,6 +9,8 @@
         content="Puissance 4 en ligne : joue en temps réel depuis ton navigateur, défie tes amis ou lance une partie publique.">
     <title>Puissance 4 en ligne</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/landing.js" defer></script>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
 </head>
 
 <body>
@@ -20,7 +22,7 @@
             <nav class="site-nav">
                 <a href="#regles">Règles</a>
                 <a href="#features">Fonctionnalités</a>
-                <a class="btn btn--small btn--primary" href="/play">Jouer</a>
+                <a class="btn btn--small btn--primary" href="/game/init">Jouer</a>
             </nav>
         </div>
     </header>
@@ -30,23 +32,23 @@
             <div class="container hero__grid">
                 <div class="hero__content">
                     <p class="eyebrow">Puissance 4 en ligne</p>
-                    <h1>Aligne quatre jetons et défie tes amis en temps réel</h1>
+                    <h1 class="hero-title">Aligne quatre jetons et défie tes amis en temps réel</h1>
                     <p class="lead">
                         Une version moderne du classique Puissance 4, jouable directement depuis ton navigateur.
                         Invite un ami ou lance une partie publique pour montrer ta stratégie.
                     </p>
                     <div class="hero__actions">
-                        <a class="btn btn--primary" href="/play">Jouer maintenant</a>
+                        <a class="btn btn--primary btn--pulse" href="/game/init">Jouer maintenant</a>
                         <a class="btn btn--ghost" href="#regles">Voir les règles</a>
                     </div>
-                    <ul class="badges">
+                    <ul class="badges badges--animated">
                         <li>Temps réel</li>
                         <li>Matchmaking auto</li>
                         <li>100% gratuit</li>
                     </ul>
                 </div>
                 <div class="hero__media">
-                    <div class="board board--preview">
+                    <div class="board board--preview" data-preview-board>
                         <div class="board__row">
                             <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
                         </div>
@@ -65,12 +67,15 @@
                         <div class="board__row">
                             <span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span><span class="board__cell"></span>
                         </div>
+                        <span class="sparkle sparkle--one"></span>
+                        <span class="sparkle sparkle--two"></span>
+                        <span class="sparkle sparkle--three"></span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="regles" class="rules">
+        <section id="regles" class="rules reveal">
             <div class="container">
                 <h2>Comment jouer ?</h2>
                 <div class="rules__grid">
@@ -93,7 +98,7 @@
             </div>
         </section>
 
-        <section id="features" class="features">
+        <section id="features" class="features reveal">
             <div class="container">
                 <h2>Pourquoi tu vas aimer</h2>
                 <div class="features__grid">
@@ -113,13 +118,13 @@
             </div>
         </section>
 
-        <section class="cta">
+        <section class="cta reveal">
             <div class="container cta__content">
                 <div>
                     <h2>Prêt à jouer ?</h2>
                     <p>La prochaine partie commence dès que tu cliques.</p>
                 </div>
-                <a class="btn btn--primary btn--large" href="/play">Lancer une partie</a>
+                <a class="btn btn--primary btn--large" href="/game/init">Lancer une partie</a>
             </div>
         </section>
     </main>
@@ -128,8 +133,8 @@
         <div class="container">
             <p>&copy; 2025 Puissance 4 Online. Propulsé par Go.</p>
             <div class="footer__links">
-                <a href="/templates/scoreboard">Scoreboard</a>
-                <a href="/templates/play">Salle de jeu</a>
+                <a href="/game/scoreboard">Scoreboard</a>
+                <a href="/game/play">Salle de jeu</a>
             </div>
         </div>
     </footer>

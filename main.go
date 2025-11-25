@@ -5,10 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-	"strconv"
-	"time"
 
-	"power-4-web/models"
+	"power-4-web/handlers"
 )
 
 func main() {
@@ -21,57 +19,31 @@ func main() {
 			}
 			return s
 		},
+		"inc": func(i int) int {
+			return i + 1
+		},
 	}).ParseGlob("./templates/*.html"))
 
-	http.HandleFunc("/templates/play", func(w http.ResponseWriter, r *http.Request) {
-		temp.ExecuteTemplate(w, "play", nil)
-	})
+	initPageHandler := handlers.InitPageHandler(temp)
+	http.HandleFunc("/game/init", initPageHandler)
+	http.HandleFunc("/init", initPageHandler)
+	http.HandleFunc("/game/init/traitement", handlers.InitProcessHandler())
 
-	http.HandleFunc("/templates/init", func(w http.ResponseWriter, r *http.Request) {
-		temp.ExecuteTemplate(w, "init", nil)
-	})
+	playPageHandler := handlers.PlayPageHandler(temp)
+	http.HandleFunc("/game/play", playPageHandler)
+	http.HandleFunc("/play", playPageHandler)
+	http.HandleFunc("/game/play/traitement", handlers.PlayActionHandler())
 
-	http.HandleFunc("/templates/end", func(w http.ResponseWriter, r *http.Request) {
-		q := r.URL.Query()
-		p1 := q.Get("player1")
-		p2 := q.Get("player2")
-		winner := q.Get("winner")
-		turns := 0
-		if t := q.Get("turns"); t != "" {
-			if v, err := strconv.Atoi(t); err == nil {
-				turns = v
-			}
-		}
+	endHandler := handlers.EndPageHandler(temp)
+	http.HandleFunc("/game/end", endHandler)
+	http.HandleFunc("/templates/end", endHandler)
 
-		rec := models.GameRecord{
-			Player1: p1,
-			Player2: p2,
-			Winner:  winner,
-			Date:    time.Now(),
-			Turns:   turns,
-		}
-		models.AddRecord(rec)
+	scoreboardHandler := handlers.ScoreboardHandler(temp)
+	http.HandleFunc("/game/scoreboard", scoreboardHandler)
+	http.HandleFunc("/templates/scoreboard", scoreboardHandler)
 
-		data := struct {
-			Player1 string
-			Player2 string
-			Winner  string
-			Date    string
-			Turns   int
-		}{
-			Player1: rec.Player1,
-			Player2: rec.Player2,
-			Winner:  rec.Winner,
-			Date:    rec.Date.Format("2006-01-02 15:04:05"),
-			Turns:   rec.Turns,
-		}
-
-		temp.ExecuteTemplate(w, "end", data)
-	})
-
-	http.HandleFunc("/templates/scoreboard", func(w http.ResponseWriter, r *http.Request) {
-		temp.ExecuteTemplate(w, "scoreboard", nil)
-	})
+	http.HandleFunc("/api/init", handlers.InitGameAPI)
+	http.HandleFunc("/api/play", handlers.PlayMove)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.String() != "/" {

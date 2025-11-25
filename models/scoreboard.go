@@ -2,20 +2,35 @@ package models
 
 import "time"
 
-// GameRecord stores a finished game's summary for the scoreboard/history.
 type GameRecord struct {
-	Player1 string    `json:"player1"`
-	Player2 string    `json:"player2"`
-	Winner  string    `json:"winner"` // empty string for draw
-	Date    time.Time `json:"date"`
-	Turns   int       `json:"turns"`
+	Winner string
+	Loser  string
+	Date   string
 }
 
-// History holds all finished games. It's a package-level variable so handlers can append to it.
-// For this small app we don't enforce heavy concurrency controls; append is okay for now.
-var History []GameRecord
+var Scoreboard []GameRecord
 
-// AddRecord appends a finished game record to the global history.
-func AddRecord(r GameRecord) {
-	History = append(History, r)
+func AddRecord(game *Game) {
+	winnerName := "Égalité"
+	loserName := "Personne"
+
+	if game.Status == "win" {
+		winnerName = game.Winner
+
+		if game.Players[0].Name == winnerName {
+			loserName = game.Players[1].Name
+		} else {
+			loserName = game.Players[0].Name
+		}
+	} else {
+		winnerName = game.Players[0].Name + " & " + game.Players[1].Name
+	}
+
+	record := GameRecord{
+		Winner: winnerName,
+		Loser:  loserName,
+		Date:   time.Now().Format("02/01/2006 15:04"),
+	}
+
+	Scoreboard = append([]GameRecord{record}, Scoreboard...)
 }
