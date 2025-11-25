@@ -8,8 +8,10 @@ type GameRecord struct {
 	Date   string
 }
 
+// Scoreboard stocke l'historique de toutes les parties
 var Scoreboard []GameRecord
 
+// AddRecord ajoute une partie terminée au tableau des scores
 func AddRecord(game *Game) {
 	winnerName := "Égalité"
 	loserName := "Personne"
@@ -23,6 +25,7 @@ func AddRecord(game *Game) {
 			loserName = game.Players[0].Name
 		}
 	} else {
+		// Cas du match nul
 		winnerName = game.Players[0].Name + " & " + game.Players[1].Name
 	}
 
@@ -32,5 +35,6 @@ func AddRecord(game *Game) {
 		Date:   time.Now().Format("02/01/2006 15:04"),
 	}
 
+	
 	Scoreboard = append([]GameRecord{record}, Scoreboard...)
 }

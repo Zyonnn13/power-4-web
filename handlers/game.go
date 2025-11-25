@@ -14,6 +14,7 @@ var (
 	mutex       sync.Mutex
 )
 
+
 func StartGameLogic(p1, p2 string) {
 	mutex.Lock()
 	defer mutex.Unlock()
@@ -45,8 +46,6 @@ func InitProcessHandler() http.HandlerFunc {
 	}
 }
 
-// Dans handlers/game.go
-
 func PlayPageHandler(temp *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		mutex.Lock()
@@ -56,6 +55,13 @@ func PlayPageHandler(temp *template.Template) http.HandlerFunc {
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 			return
 		}
+
+		
+		if currentGame.Status != "playing" {
+			http.Redirect(w, r, "/game/end", http.StatusSeeOther)
+			return
+		}
+		
 
 		cols := make([]int, models.Cols)
 		for i := range cols {
@@ -84,6 +90,22 @@ func PlayActionHandler() http.HandlerFunc {
 			return
 		}
 
+		
+		action := r.FormValue("action")
+		if action == "reset" {
+			p1Name := currentGame.Players[0].Name
+			p2Name := currentGame.Players[1].Name
+
+			
+			currentGame = models.NewGame()
+			currentGame.ConfigurePlayers(p1Name, p2Name, "red", "yellow")
+
+			
+			http.Redirect(w, r, "/game/play", http.StatusSeeOther)
+			return
+		}
+	
+
 		colStr := r.FormValue("col")
 		if colStr == "" {
 			colStr = r.URL.Query().Get("col")
@@ -109,7 +131,7 @@ func EndPageHandler(temp *template.Template) http.HandlerFunc {
 
 func ScoreboardHandler(temp *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		// Assurez-vous que models.Scoreboard est bien défini et public dans votre package models
 		temp.ExecuteTemplate(w, "scoreboard", models.Scoreboard)
 	}
 }
