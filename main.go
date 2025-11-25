@@ -48,7 +48,7 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.String() != "/" {
 			w.WriteHeader(http.StatusNotFound)
-			w.Write([]byte("404"))
+			temp.ExecuteTemplate(w, "404", nil)
 			return
 		}
 		temp.ExecuteTemplate(w, "index", nil)
