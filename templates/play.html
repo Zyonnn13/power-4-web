@@ -28,23 +28,12 @@
             </div>
             
             <div class="status">
-                {{if ne .Game.Status "playing"}}
-                    <p class="status-badge status-badge--info">
-                        Partie terminée. 
-                        {{if eq .Game.Status "win"}}
-                            Vainqueur : {{.Game.Winner}}
-                        {{else}}
-                            Match Nul !
-                        {{end}}
-                    </p>
-                {{else}}
-                    <p class="status-badge">
-                        Tour de 
-                        <span class="player-label player-label--{{(index .Game.Players .Game.Turn).Color}}">
-                            {{(index .Game.Players .Game.Turn).Name}}
-                        </span>
-                    </p>
-                {{end}}
+                <p class="status-badge">
+                    Tour de 
+                    <span class="player-label player-label--{{(index .Game.Players .Game.Turn).Color}}">
+                        {{(index .Game.Players .Game.Turn).Name}}
+                    </span>
+                </p>
             </div>
         </header>
         {{if .Game.ErrorMsg}}
@@ -56,7 +45,7 @@
         <section class="board-panel">
             <form method="POST" action="/game/play/traitement" class="column-picker">
                 {{range $idx, $col := .Columns}}
-                <button type="submit" name="col" value="{{$col}}" {{if ne $.Game.Status "playing"}}disabled{{end}}>
+                <button type="submit" name="col" value="{{$col}}">
                     {{inc $col}}
                 </button>
                 {{end}}
@@ -73,11 +62,16 @@
             </div>
         </section>
 
+<<<<<<< HEAD
        <section class="actions">
             {{if eq .Game.Status "playing"}}
                 <p>Choisis une colonne pour déposer ton jeton.</p>
             {{end}}
 
+=======
+        <section class="actions">
+            <p>Choisis une colonne pour déposer ton jeton.</p>
+>>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec
             <a class="btn btn--ghost btn--back" href="/">Retour à l’accueil</a>
         </section>
     </main>

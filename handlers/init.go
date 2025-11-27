@@ -15,6 +15,7 @@ var (
 	mutex       sync.Mutex
 )
 
+<<<<<<< HEAD:handlers/init.go
 func InitPageHandler(temp *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -23,6 +24,10 @@ func InitPageHandler(temp *template.Template) http.HandlerFunc {
 }
 
 func StartGameLogic(p1, p2 string, colorChoice string) {
+=======
+
+func StartGameLogic(p1, p2 string) {
+>>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec:handlers/game.go
 	mutex.Lock()
 	defer mutex.Unlock()
 
@@ -73,6 +78,13 @@ func PlayPageHandler(temp *template.Template) http.HandlerFunc {
 			return
 		}
 
+		
+		if currentGame.Status != "playing" {
+			http.Redirect(w, r, "/game/end", http.StatusSeeOther)
+			return
+		}
+		
+
 		cols := make([]int, models.Cols)
 		for i := range cols {
 			cols[i] = i
@@ -100,7 +112,25 @@ func PlayActionHandler() http.HandlerFunc {
 			return
 		}
 
+<<<<<<< HEAD:handlers/init.go
 		currentGame.ErrorMsg = ""
+=======
+		
+		action := r.FormValue("action")
+		if action == "reset" {
+			p1Name := currentGame.Players[0].Name
+			p2Name := currentGame.Players[1].Name
+
+			
+			currentGame = models.NewGame()
+			currentGame.ConfigurePlayers(p1Name, p2Name, "red", "yellow")
+
+			
+			http.Redirect(w, r, "/game/play", http.StatusSeeOther)
+			return
+		}
+	
+>>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec:handlers/game.go
 
 		colStr := r.FormValue("col")
 		if colStr == "" {
@@ -191,6 +221,7 @@ func RestartHandler() http.HandlerFunc {
 
 func ScoreboardHandler(temp *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+<<<<<<< HEAD:handlers/init.go
 
 		data := struct {
 			Records []models.GameRecord
@@ -198,6 +229,10 @@ func ScoreboardHandler(temp *template.Template) http.HandlerFunc {
 			Records: models.Scoreboard,
 		}
 		temp.ExecuteTemplate(w, "scoreboard", data)
+=======
+		// Assurez-vous que models.Scoreboard est bien défini et public dans votre package models
+		temp.ExecuteTemplate(w, "scoreboard", models.Scoreboard)
+>>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec:handlers/game.go
 	}
 }
 
