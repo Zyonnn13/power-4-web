@@ -28,12 +28,23 @@
             </div>
             
             <div class="status">
-                <p class="status-badge">
-                    Tour de 
-                    <span class="player-label player-label--{{(index .Game.Players .Game.Turn).Color}}">
-                        {{(index .Game.Players .Game.Turn).Name}}
-                    </span>
-                </p>
+                {{if ne .Game.Status "playing"}}
+                    <p class="status-badge status-badge--info">
+                        Partie terminée. 
+                        {{if eq .Game.Status "win"}}
+                            Vainqueur : {{.Game.Winner}}
+                        {{else}}
+                            Match Nul !
+                        {{end}}
+                    </p>
+                {{else}}
+                    <p class="status-badge">
+                        Tour de 
+                        <span class="player-label player-label--{{(index .Game.Players .Game.Turn).Color}}">
+                            {{(index .Game.Players .Game.Turn).Name}}
+                        </span>
+                    </p>
+                {{end}}
             </div>
         </header>
         {{if .Game.ErrorMsg}}
@@ -45,7 +56,7 @@
         <section class="board-panel">
             <form method="POST" action="/game/play/traitement" class="column-picker">
                 {{range $idx, $col := .Columns}}
-                <button type="submit" name="col" value="{{$col}}">
+                <button type="submit" name="col" value="{{$col}}" {{if ne $.Game.Status "playing"}}disabled{{end}}>
                     {{inc $col}}
                 </button>
                 {{end}}

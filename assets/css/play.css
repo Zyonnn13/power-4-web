@@ -202,7 +202,6 @@ p {
     border-color: rgba(255, 214, 10, 0.6);
 }
 
-
 .actions {
     margin-top: 2rem;
     display: flex;
@@ -292,11 +291,11 @@ p {
 
 
 
-
+/* Animation pour les jetons gagnants */
 .winner-token {
     animation: pulse-winner 1s infinite alternate;
-    border: 4px solid #fff !important; 
-    box-shadow: 0 0 20px #fff, 0 0 40px var(--primary); 
+    border: 4px solid #fff !important; /* Bordure blanche pour ressortir */
+    box-shadow: 0 0 20px #fff, 0 0 40px var(--primary); /* Effet néon */
     z-index: 10;
 }
 

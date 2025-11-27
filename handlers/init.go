@@ -73,11 +73,6 @@ func PlayPageHandler(temp *template.Template) http.HandlerFunc {
 			return
 		}
 
-		if currentGame.Status != "playing" {
-			http.Redirect(w, r, "/game/end", http.StatusSeeOther)
-			return
-		}
-
 		cols := make([]int, models.Cols)
 		for i := range cols {
 			cols[i] = i
@@ -134,6 +129,7 @@ func EndPageHandler(temp *template.Template) http.HandlerFunc {
 			return
 		}
 
+		// Calcul du nombre de tours joués (en comptant les pions dans la grille)
 		turnsPlayed := 0
 		for r := 0; r < models.Rows; r++ {
 			for c := 0; c < models.Cols; c++ {
@@ -143,6 +139,7 @@ func EndPageHandler(temp *template.Template) http.HandlerFunc {
 			}
 		}
 
+		// Préparation des données pour le HTML
 		data := struct {
 			Winner  string
 			Player1 string

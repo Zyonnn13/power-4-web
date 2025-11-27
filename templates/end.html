@@ -7,8 +7,6 @@
     <title>Fin de partie</title>
     <link rel="stylesheet" href="/static/css/style.css"/>
     <link rel="icon" type="image/png" href="/static/img/favicon.png">
-    <link rel="stylesheet" href="/static/css/end.css" />
-    <title>Fin de la partie - Jeu de Plateau</title>
 </head>
 <body>
     <main class="container">
@@ -36,17 +34,13 @@
                 <form method="post" action="/game/restart">
                     <button type="submit" class="btn btn--ghost">Relancer avec les mêmes joueurs</button>
                 </form>
-                
-                <a href="/game/scoreboard" class="btn btn--ghost" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
-                    Voir le scoreboard
-                </a>
-
-                %
                 <form method="get" action="/game/init">
                     <button type="submit" class="btn btn--primary">Nouvelle partie</button>
                 </form>
             </div>
-            </section>
+
+            <p><a href="/game/scoreboard" class="end-link">Voir le scoreboard</a></p>
+        </section>
     </main>
 </body>
 </html>
