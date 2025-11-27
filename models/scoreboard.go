@@ -15,17 +15,9 @@ type GameRecord struct {
 	Date    time.Time
 }
 
-// Scoreboard stocke l'historique de toutes les parties
 var Scoreboard []GameRecord
 
-<<<<<<< HEAD
 const dbFile = "scoreboard.json"
-=======
-// AddRecord ajoute une partie terminée au tableau des scores
-func AddRecord(game *Game) {
-	winnerName := "Égalité"
-	loserName := "Personne"
->>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec
 
 func AddRecord(game *Game) {
 	turns := 0
@@ -40,18 +32,6 @@ func AddRecord(game *Game) {
 	winnerName := ""
 	if game.Status == "win" {
 		winnerName = game.Winner
-<<<<<<< HEAD
-=======
-
-		if game.Players[0].Name == winnerName {
-			loserName = game.Players[1].Name
-		} else {
-			loserName = game.Players[0].Name
-		}
-	} else {
-		// Cas du match nul
-		winnerName = game.Players[0].Name + " & " + game.Players[1].Name
->>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec
 	}
 
 	record := GameRecord{
@@ -62,9 +42,7 @@ func AddRecord(game *Game) {
 		Date:    time.Now(),
 	}
 
-	
 	Scoreboard = append([]GameRecord{record}, Scoreboard...)
-<<<<<<< HEAD
 
 	SaveScoreboard()
 }
@@ -89,6 +67,3 @@ func LoadScoreboard() {
 	}
 	_ = json.Unmarshal(data, &Scoreboard)
 }
-=======
-}
->>>>>>> 0fd99c01f97dde5523264b6eb53931e24452ffec
