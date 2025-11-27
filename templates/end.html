@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fin de partie</title>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css"/>
     <link rel="icon" type="image/png" href="/static/img/favicon.png">
 </head>
 <body>
@@ -31,8 +31,8 @@
             </dl>
 
             <div class="end-actions">
-                <form method="post" action="/game/play/traitement">
-                    <button type="submit" name="action" value="reset" class="btn btn--ghost">Relancer avec les mêmes joueurs</button>
+                <form method="post" action="/game/restart">
+                    <button type="submit" class="btn btn--ghost">Relancer avec les mêmes joueurs</button>
                 </form>
                 <form method="get" action="/game/init">
                     <button type="submit" class="btn btn--primary">Nouvelle partie</button>
