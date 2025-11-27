@@ -1,5 +1,12 @@
 [
   {
+    "Player1": "j1",
+    "Player2": "j2",
+    "Winner": "j1",
+    "Turns": 7,
+    "Date": "2025-11-27T11:30:03.4568405+01:00"
+  },
+  {
     "Player1": "a",
     "Player2": "azaeaz",
     "Winner": "a",
