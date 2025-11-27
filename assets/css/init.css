@@ -23,10 +23,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../img/img.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: radial-gradient(circle at top, rgba(67, 97, 238, 0.25), transparent 50%), var(--bg);
 }
 
 section {

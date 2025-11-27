@@ -47,6 +47,11 @@
                 {{end}}
             </div>
         </header>
+        {{if .Game.ErrorMsg}}
+    <div class="error-banner">
+        {{.Game.ErrorMsg}}
+    </div>
+    {{end}}
 
         <section class="board-panel">
             <form method="POST" action="/game/play/traitement" class="column-picker">
@@ -57,7 +62,7 @@
                 {{end}}
             </form>
 
-            <div class="board">
+         <div class="board">
                 {{range $row := .Game.Grid}}
                 <div class="board-row">
                     {{range $cell := $row}}
@@ -68,20 +73,25 @@
             </div>
         </section>
 
-        <section class="actions">
-            {{if ne .Game.Status "playing"}}
-            <div class="restart-panel">
-                <p>Partie terminée !</p>
-                <div class="restart-actions">
-                    <a class="btn btn--ghost" href="/game/init">Nouvelle partie</a>
-                </div>
-            </div>
-            {{else}}
-            <p>Choisis une colonne pour déposer ton jeton.</p>
+       <section class="actions">
+            {{if eq .Game.Status "playing"}}
+                <p>Choisis une colonne pour déposer ton jeton.</p>
             {{end}}
+
             <a class="btn btn--ghost btn--back" href="/">Retour à l’accueil</a>
         </section>
     </main>
+
+   <script>
+        const gameStatus = "{{.Game.Status}}";
+        
+        
+        const winningCells = {{.Game.WinningCells | json}}; 
+
+        const lastMove = {{.Game.LastMove | json}};
+    </script>
+
+    <script src="/static/js/game.js"></script>
 </body>
 </html>
 {{end}}

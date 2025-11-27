@@ -1,15 +1,19 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
 	"os"
 
 	"power-4-web/handlers"
+	"power-4-web/models"
 )
 
 func main() {
+
+	models.LoadScoreboard()
 
 	temp := template.Must(template.New("").Funcs(template.FuncMap{
 		"seq": func(count int) []int {
@@ -21,6 +25,11 @@ func main() {
 		},
 		"inc": func(i int) int {
 			return i + 1
+		},
+
+		"json": func(v interface{}) template.JS {
+			a, _ := json.Marshal(v)
+			return template.JS(a)
 		},
 	}).ParseGlob("./templates/*.html"))
 
@@ -48,11 +57,13 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.String() != "/" {
 			w.WriteHeader(http.StatusNotFound)
-			w.Write([]byte("404"))
+			temp.ExecuteTemplate(w, "404", nil)
 			return
 		}
 		temp.ExecuteTemplate(w, "index", nil)
 	})
+
+	http.HandleFunc("/game/restart", handlers.RestartHandler())
 
 	chemin, _ := os.Getwd()
 	fmt.Println(chemin)
