@@ -1,0 +1,61 @@
+{{define "scoreboard"}}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    
+    <link rel="stylesheet" href="/static/css/scorebard.css">
+    
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+</head>
+
+<body class="scoreboard-body">
+    <main class="scoreboard-page">
+        <header class="scoreboard-header">
+            <div>
+                <p class="eyebrow">Historique</p>
+                <h1>Scoreboard</h1>
+            </div>
+            <div class="scoreboard-header__actions">
+                <a class="btn btn--ghost" href="/">Accueil</a>
+                <a class="btn btn--primary" href="/game/init">Commencer une partie</a>
+            </div>
+        </header>
+
+        {{if .Records}}
+        <div class="scoreboard-table-wrapper">
+            <table class="scoreboard-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Joueur 1</th>
+                        <th>Joueur 2</th>
+                        <th>Vainqueur</th>
+                        <th>Tours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Records}}
+                    <tr>
+                        <td>{{.Date.Format "02/01/2006 15:04"}}</td>
+                        <td>{{.Player1}}</td>
+                        <td>{{.Player2}}</td>
+                        <td>{{if .Winner}}{{.Winner}}{{else}}Égalité{{end}}</td>
+                        <td>{{.Turns}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <p class="scoreboard-empty">Aucune partie enregistrée pour le moment.</p>
+        {{end}}
+    </main>
+</body>
+
+</html>
+{{end}}
+

@@ -1,0 +1,311 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+    --bg: #040616;
+    --bg-alt: #0b0f27;
+    --card: #101636;
+    --primary: #ffb703;
+    --primary-dark: #e09800;
+    --text: #f5f7ff;
+    --muted: #9aa0c3;
+    --accent-blue: #4361ee;
+    --accent-red: #ef233c;
+    --max-width: 1100px;
+}
+
+.play-body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: radial-gradient(circle at top, rgba(67, 97, 238, 0.15), transparent 60%), var(--bg);
+}
+
+.play-body {
+    min-height: 100vh;
+    font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+}
+
+.play-wrapper {
+    min-height: 100vh;
+    padding: 2rem clamp(1rem, 5vw, 3rem);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.play-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin: 0;
+}
+
+h1 {
+    margin: 0.25rem 0 0;
+    color: var(--text);
+}
+
+p {
+    color: var(--text);
+}
+
+.status-badge {
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+}
+
+.status-badge--error {
+    color: #f9b4c5;
+    border-color: rgba(239, 35, 60, 0.4);
+    background: rgba(239, 35, 60, 0.1);
+}
+
+.status-badge--info {
+    color: #bfe3ff;
+    border-color: rgba(67, 97, 238, 0.4);
+    background: rgba(67, 97, 238, 0.08);
+}
+
+.players-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.players-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.player-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.player-dot--red {
+    background: radial-gradient(circle at 30% 30%, #ff4d6d);
+}
+
+.player-dot--yellow {
+    background: radial-gradient(circle at 30% 30%, #ffd60a);
+}
+
+.player-label {
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.player-label--red,
+.player-red {
+    color: #ff4d6d;
+}
+
+.player-label--yellow,
+.player-yellow {
+    color: #ffd60a;
+}
+
+.board-panel {
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.column-picker {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(40px, 1fr));
+    gap: 0.5rem;
+}
+
+.column-picker button {
+    border: none;
+    background: rgba(67, 97, 238, 0.3);
+    color: var(--text);
+    padding: 0.6rem 0;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.column-picker button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: rgba(67, 97, 238, 0.5);
+}
+
+.column-picker button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.board {
+    background: linear-gradient(180deg, #18214f, var(--bg-alt));
+    border-radius: 28px;
+    padding: 1.5rem;
+    box-shadow: 0 25px 60px rgba(5, 7, 18, 0.5);
+}
+
+.board-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.board-row:last-child {
+    margin-bottom: 0;
+}
+
+.board-cell {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: inline-block;
+}
+
+.board-cell--red {
+    background: radial-gradient(circle at 30% 30%, #e4163b);
+    border-color: rgba(255, 77, 109, 0.6);
+}
+
+.board-cell--yellow {
+    background: radial-gradient(circle at 30% 30%, #ffd60a);
+    border-color: rgba(255, 214, 10, 0.6);
+}
+
+.actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.restart-panel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 1.5rem;
+    flex: 1 1 100%;
+}
+
+.restart-panel p {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.restart-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.85rem 1.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn--secondary {
+    background: var(--accent-red);
+    color: #fff;
+    box-shadow: 0 12px 32px rgba(239, 35, 60, 0.35);
+}
+
+.btn--ghost {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text);
+    background: transparent;
+}
+
+.btn--back {
+    margin-left: auto;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+    .board-cell {
+        width: 46px;
+        height: 46px;
+    }
+}
+
+
+
+.error-banner {
+    background-color: rgba(239, 35, 60, 0.9);
+    color: white;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 600px;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #ff6b6b;
+    box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
+    
+   
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+
+
+/* Animation pour les jetons gagnants */
+.winner-token {
+    animation: pulse-winner 1s infinite alternate;
+    border: 4px solid #fff !important; /* Bordure blanche pour ressortir */
+    box-shadow: 0 0 20px #fff, 0 0 40px var(--primary); /* Effet néon */
+    z-index: 10;
+}
+
+@keyframes pulse-winner {
+    from {
+        transform: scale(1);
+        filter: brightness(1.2);
+    }
+    to {
+        transform: scale(1.1);
+        filter: brightness(1.5);
+    }
+}

@@ -1,0 +1,97 @@
+{{define "play"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puissance 4</title>
+    <link rel="stylesheet" href="/static/css/play.css">
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+</head>
+
+<body class="play-body">
+    <main class="play-wrapper">
+        <header class="play-header">
+            <div>
+                <p class="eyebrow">Partie en cours</p>
+                <h1>Puissance 4</h1>
+                <ul class="players-list">
+                    <li>
+                        <span class="player-dot player-dot--{{(index .Game.Players 0).Color}}"></span>
+                        <span>{{(index .Game.Players 0).Name}}</span>
+                    </li>
+                    <li>
+                        <span class="player-dot player-dot--{{(index .Game.Players 1).Color}}"></span>
+                        <span>{{(index .Game.Players 1).Name}}</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="status">
+                {{if ne .Game.Status "playing"}}
+                    <p class="status-badge status-badge--info">
+                        Partie terminée. 
+                        {{if eq .Game.Status "win"}}
+                            Vainqueur : {{.Game.Winner}}
+                        {{else}}
+                            Match Nul !
+                        {{end}}
+                    </p>
+                {{else}}
+                    <p class="status-badge">
+                        Tour de 
+                        <span class="player-label player-label--{{(index .Game.Players .Game.Turn).Color}}">
+                            {{(index .Game.Players .Game.Turn).Name}}
+                        </span>
+                    </p>
+                {{end}}
+            </div>
+        </header>
+        {{if .Game.ErrorMsg}}
+    <div class="error-banner">
+        {{.Game.ErrorMsg}}
+    </div>
+    {{end}}
+
+        <section class="board-panel">
+            <form method="POST" action="/game/play/traitement" class="column-picker">
+                {{range $idx, $col := .Columns}}
+                <button type="submit" name="col" value="{{$col}}" {{if ne $.Game.Status "playing"}}disabled{{end}}>
+                    {{inc $col}}
+                </button>
+                {{end}}
+            </form>
+
+         <div class="board">
+                {{range $row := .Game.Grid}}
+                <div class="board-row">
+                    {{range $cell := $row}}
+                        <span class="board-cell {{if $cell}}board-cell--{{$cell}}{{end}}"></span>
+                    {{end}}
+                </div>
+                {{end}}
+            </div>
+        </section>
+
+       <section class="actions">
+            {{if eq .Game.Status "playing"}}
+                <p>Choisis une colonne pour déposer ton jeton.</p>
+            {{end}}
+
+            <a class="btn btn--ghost btn--back" href="/">Retour à l’accueil</a>
+        </section>
+    </main>
+
+   <script>
+        const gameStatus = "{{.Game.Status}}";
+        
+        
+        const winningCells = {{.Game.WinningCells | json}}; 
+
+        const lastMove = {{.Game.LastMove | json}};
+    </script>
+
+    <script src="/static/js/game.js"></script>
+</body>
+</html>
+{{end}}
